@@ -50,7 +50,7 @@ function App() {
       if (rest.current.disabled == true) {// Si prev está deshabilitado se activa
         rest.current.disabled = false
       }
-      if (parseInt(diapo) == cartas.length-2) {
+      if (parseInt(diapo) == cartas.length-2) { // Al terminar ciclo deshabilita next
         next.current.disabled = true
       }
     }
@@ -64,7 +64,7 @@ function App() {
       if (next.current.disabled == true) { // Si next está deshabilitado se activa
         next.current.disabled = false
       }
-      if (parseInt(diapo) == 1) {
+      if (parseInt(diapo) == 1) { // Al terminar ciclo deshabilita prev
         prev.current.disabled = true
       }
     }
