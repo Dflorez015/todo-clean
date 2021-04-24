@@ -10,13 +10,25 @@ function App() {
   // Información de las diapositivas
   const cartas = [
     {
-      title: "Diapositiva 1",
-      text: "We' re gonna do 3"
+      title: "Today' s workout plan",
+      text: "We' re gonna do 3 fundamental exercises."
     },
     {
-      title: "Diapositiva 2",
-      text: "Do 10 reps."
-    }
+      title: "First, 10 push-ups",
+      text: "Do 10 reps. Remember about full range of motion. Don't rush."
+    },
+    {
+      title: "Next, 20 squats",
+      text: "Squats are important. Remember to keep your back straight."
+    },
+    {
+      title: "Finally, 15 sit-ups",
+      text: "Slightly bend your knees. Remember about full range of motion."
+    },
+    {
+      title: "Great job!",
+      text: "You made it, have a nice day and see you next time!"
+    },
   ]
 
   // Hook para saber en qué diapositiva me encuentro
@@ -25,14 +37,18 @@ function App() {
   // Referenciar para modificar los botones next y ref
   let next = React.createRef()
   let prev = React.createRef()
+  let rest = React.createRef()
 
   // Si hay una diapositiva después 
   const isNext = () => {
     let num = parseInt(diapo)
     if (cartas.length - 1 > num) {
       setDiapo(diapo + 1) // Si hay, escoge la siguiente      
-      if(prev.current.disabled == true){// Si prev está deshabilitado se activa
+      if (prev.current.disabled == true) {// Si prev está deshabilitado se activa
         prev.current.disabled = false
+      }
+      if (rest.current.disabled == true) {// Si prev está deshabilitado se activa
+        rest.current.disabled = false
       }
     } else {
       next.current.disabled = true
@@ -44,15 +60,24 @@ function App() {
     let num = parseInt(diapo)
     if (num != 0) {
       setDiapo(diapo - 1) // Si hay, escoge la anterior
-      if(parseInt(diapo) == 0){
+      if (parseInt(diapo) == 0) {
         prev.current.disabled = true
       }
-      if(next.current.disabled == true){ // Si next está deshabilitado se activa
+      if (next.current.disabled == true) { // Si next está deshabilitado se activa
         next.current.disabled = false
       }
-    }else{
+    } else {
       prev.current.disabled = true
     }
+  }
+
+  const restart = () => {
+    setDiapo(0)
+    prev.current.disabled = true
+    if (next.current.disabled == true) { // Si next está deshabilitado se activa
+      next.current.disabled = false
+    }
+    rest.current.disabled = true
   }
 
   // Retorna el titulo de la diapositiva actual
@@ -72,7 +97,10 @@ function App() {
       <Header />
       <div className="row ">
         <div className="centro">
-          <button className="btn btn-dark" onClick={() => { setDiapo(0) }}>Restart</button>
+          {
+            diapo == '1'
+          }
+          <button className="btn btn-dark" ref={rest} onClick={() => { restart() }}>Restart</button>
           <button className="btn btn-primary" ref={prev} onClick={() => { isPrev() }}>Prev</button>
           <button className="btn btn-primary" ref={next} onClick={() => { isNext() }}>Next</button>
         </div>
