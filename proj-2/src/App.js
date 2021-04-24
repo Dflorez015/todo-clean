@@ -34,24 +34,24 @@ function App() {
   // Hook para saber en qué diapositiva me encuentro
   const [diapo, setDiapo] = useState(0)
 
-  // Referenciar para modificar los botones next y ref
-  let next = React.createRef()
-  let prev = React.createRef()
-  let rest = React.createRef()
+  // Hooks booleanos para manipular la opción disabled de los botones
+  const [nextBool, setNextBool] = useState(false)
+  const [prevBool, setPrevBool] = useState(true)
+  const [restBool, setRestBool] = useState(true)
 
   // Si hay una diapositiva después 
   const isNext = () => {
     let num = parseInt(diapo)
     if (cartas.length - 1 > num) {
       setDiapo(diapo + 1) // Si hay, escoge la siguiente      
-      if (prev.current.disabled == true) {// Si prev está deshabilitado se activa
-        prev.current.disabled = false
+      if (prevBool == true) {// Si prev está deshabilitado se activa
+        setPrevBool(false)
       }
-      if (rest.current.disabled == true) {// Si prev está deshabilitado se activa
-        rest.current.disabled = false
+      if (restBool == true) {// Si prev está deshabilitado se activa
+        setRestBool(false)
       }
-      if (parseInt(diapo) == cartas.length-2) { // Al terminar ciclo deshabilita next
-        next.current.disabled = true
+      if (parseInt(diapo) == cartas.length - 2) { // Al terminar ciclo deshabilita next
+        setNextBool(true)
       }
     }
   }
@@ -61,25 +61,26 @@ function App() {
     let num = parseInt(diapo)
     if (num != 0) {
       setDiapo(diapo - 1) // Si hay, escoge la anterior
-      if (next.current.disabled == true) { // Si next está deshabilitado se activa
-        next.current.disabled = false
+      if (nextBool == true) { // Si next está deshabilitado se activa
+        setNextBool(false)
       }
-      if (parseInt(diapo) == 1) { // Al terminar ciclo deshabilita prev
-        prev.current.disabled = true
+      if (parseInt(diapo) == 1) { // Al terminar ciclo deshabilita prev y restart
+        setPrevBool(true)
+        setRestBool(true)
       }
     }
   }
 
-  // Restaura hasta el inicio de las diapositivas
+  // Restaura hasta el inicio de las diapositivas y los valores disabled de los botones
   const restart = () => {
     setDiapo(0)
-    if (prev.current.disabled == false) {
-      prev.current.disabled = true
+    if (prevBool == false) {
+      setPrevBool(true)
     }
-    if (next.current.disabled == true) { // Si next está deshabilitado se activa || caso de bug
-      next.current.disabled = false
+    if (nextBool == true) { // Si next está deshabilitado se activa || caso de bug
+      setNextBool(false)
     }
-    rest.current.disabled = true
+    setRestBool(true)
   }
 
   // Retorna el titulo de la diapositiva actual
@@ -99,9 +100,9 @@ function App() {
       <Header />
       <div className="row ">
         <div className="centro">
-          <button className="btn btn-dark" ref={rest} onClick={() => { restart() }}>Restart</button>
-          <button className="btn btn-primary" ref={prev} onClick={() => { isPrev() }}>Prev</button>
-          <button className="btn btn-primary" ref={next} onClick={() => { isNext() }}>Next</button>
+          <button className="btn btn-dark" disabled={restBool} onClick={() => { restart() }}>Restart</button>
+          <button className="btn btn-primary" disabled={prevBool} onClick={() => { isPrev() }}>Prev</button>
+          <button className="btn btn-primary" disabled={nextBool} onClick={() => { isNext() }}>Next</button>
         </div>
       </div>
 
