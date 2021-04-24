@@ -30,9 +30,9 @@ function App() {
   const isNext = () => {
     let num = parseInt(diapo)
     if (cartas.length - 1 > num) {
-      setDiapo(diapo + 1) // Si hay, escoge la siguiente
-      if(parseInt(diapo) === cartas.length - 1){
-        next.current.disabled = true
+      setDiapo(diapo + 1) // Si hay, escoge la siguiente      
+      if(prev.current.disabled == true){// Si prev está deshabilitado se activa
+        prev.current.disabled = false
       }
     } else {
       next.current.disabled = true
@@ -44,6 +44,14 @@ function App() {
     let num = parseInt(diapo)
     if (num != 0) {
       setDiapo(diapo - 1) // Si hay, escoge la anterior
+      if(parseInt(diapo) == 0){
+        prev.current.disabled = true
+      }
+      if(next.current.disabled == true){ // Si next está deshabilitado se activa
+        next.current.disabled = false
+      }
+    }else{
+      prev.current.disabled = true
     }
   }
 
