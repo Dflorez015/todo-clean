@@ -50,8 +50,6 @@ function App() {
       if (rest.current.disabled == true) {// Si prev está deshabilitado se activa
         rest.current.disabled = false
       }
-    } else {
-      next.current.disabled = true
     }
   }
 
@@ -60,21 +58,22 @@ function App() {
     let num = parseInt(diapo)
     if (num != 0) {
       setDiapo(diapo - 1) // Si hay, escoge la anterior
-      if (parseInt(diapo) == 0) {
-        prev.current.disabled = true
-      }
       if (next.current.disabled == true) { // Si next está deshabilitado se activa
         next.current.disabled = false
       }
-    } else {
-      prev.current.disabled = true
+      if (parseInt(diapo) == 0) {
+        prev.current.disabled = true
+      }
     }
   }
 
+  // Restaura hasta el inicio de las diapositivas
   const restart = () => {
     setDiapo(0)
-    prev.current.disabled = true
-    if (next.current.disabled == true) { // Si next está deshabilitado se activa
+    if (prev.current.disabled == false) {
+      prev.current.disabled = true
+    }
+    if (next.current.disabled == true) { // Si next está deshabilitado se activa || caso de bug
       next.current.disabled = false
     }
     rest.current.disabled = true
@@ -97,9 +96,6 @@ function App() {
       <Header />
       <div className="row ">
         <div className="centro">
-          {
-            diapo == '1'
-          }
           <button className="btn btn-dark" ref={rest} onClick={() => { restart() }}>Restart</button>
           <button className="btn btn-primary" ref={prev} onClick={() => { isPrev() }}>Prev</button>
           <button className="btn btn-primary" ref={next} onClick={() => { isNext() }}>Next</button>
