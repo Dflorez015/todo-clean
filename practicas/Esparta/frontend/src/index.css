@@ -1,0 +1,337 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --shadow: #00000029;
+  --borders: #A2A2A2;
+  --muted: #ABABAB;
+  --bg-home-icon: #3E3E3E;
+  --bg-arrow-icon: #3F4A59;
+  --bg-tag-card: #C42133;
+  --bg-content-card: #EEEEEE;
+  --light-font: #818080;
+  --mustard: #E4C87D;
+  --dark-mustard: #c4ac6a;
+}
+
+/* Importtación de font family*/
+
+@font-face {
+  font-family: 'Poppin';
+  src: local('Poppin'), url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppin-Light';
+  src: local('Poppin-Light'), url('./assets/fonts/Poppins-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppin-Medium';
+  src: local('Poppin-Medium'), url('./assets/fonts/Poppins-Medium.ttf') format('truetype');
+}
+
+body {
+  font-family: Poppin;
+  width: 100%;
+  height: 100%;
+  background-image: url("./assets/images/tmobg.jpg");
+}
+
+/* 
+* Menú
+*/
+
+header nav {
+  background-color: #fff;
+  width: 100%;
+  height: 75px;
+  box-shadow: 0px 3px 6px var(--shadow);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li {
+  list-style: none;
+}
+
+/* Hijos de los extremos del nav*/
+
+nav li:nth-child(2n+1) {
+  margin: 0 34px;
+}
+
+/* Home icon*/
+
+.iconHome {
+  color: var(--bg-home-icon);
+  height: 4rem;
+  width: 3.75rem;
+}
+
+.iconHome:hover {
+  cursor: pointer;
+}
+
+/* Títulos SVG */
+
+.title {
+  display: flex;
+  align-items: center;
+  width: 197px;
+  justify-content: space-between;
+}
+
+/* Main content*/
+
+/*Botón para regresar*/
+
+.backBtn {
+  height: 3rem;
+  width: 7rem;
+  margin: 3.4rem 3rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0px 3px 6px var(--shadow);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.backBtn p {
+  font-family: Poppin-Light;
+  color: var(--light-font);
+  font-size: 18px;
+}
+
+.backBtn:hover {
+  cursor: pointer;
+  background-color: var(--shadow);
+}
+
+.backArrow {
+  color: var(--bg-arrow-icon);
+  height: 34px;
+  width: 34px;
+}
+
+/*Centrar contenido del botón*/
+
+.btn {
+  display: flex;
+  align-items: center;
+}
+
+/*Botón para agregar candidato*/
+
+.add-applicant {
+  background-color: #fff;
+  color: var(--bg-tag-card);
+  border: 1px solid var(--bg-tag-card);
+  border-radius: 5px;
+  box-shadow: 0 3px 6px var(--shadow);
+  font-size: 16px;
+  padding: 8px 10px;
+  float: right;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.add-applicant:hover {
+  cursor: pointer;
+  background-color: var(--bg-tag-card);
+  color: #fff;
+}
+
+/*
+* Cartas de información
+*/
+
+.card-container {
+  display: grid;
+  grid-template-columns: .5fr minmax(400px, 2fr) .5fr;
+  grid-template-rows: repeat(auto-fit, minmax(60px, 1fr));
+  text-align: center;
+}
+
+/*Div del tag de la carta*/
+
+.card-tag {
+  grid-column: 2;
+  position: relative;
+}
+
+/*Tag donde van el título de la carta*/
+
+.tag {
+  background-color: var(--bg-tag-card);
+  width: min(230px, 500px);
+  border-radius: 4px 4px 0 0;
+  color: #fff;
+  font-size: 18px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 10px 0;
+}
+
+/*Cuerpo de la carta*/
+
+.card-content {
+  grid-column: 2;
+  background-color: #fff;
+  border-radius: 0 29px 29px 29px;
+  box-shadow: 0px 3px 6px var(--shadow);
+  padding: 40px;
+}
+
+/*
+* Item de la lista de candidatos y pacientes
+*/
+
+.item {
+  width: calc(98% - 28px);
+  background-color: var(--bg-content-card);
+  border-radius: 8px;
+  padding: 10px 30px;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+.item table {
+  text-align: left;
+  width: 100%;
+  max-height: 600px;
+  font-size: 16px;
+}
+
+.item td {
+  width: min(230px, 520px);
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
+}
+
+.info>label {
+  margin-right: 10px;
+  width: 80px;
+}
+
+.info>p {
+  color: var(--bg-arrow-icon);
+  font-family: Poppin-Light;
+}
+
+.last-column>label {
+  width: 140px;
+}
+
+/* Modal agregar/buscar candidato*/
+
+.modal {
+  background-color: #fff;
+  width: 360px;
+  box-shadow: 0 3px 6px var(--shadow);
+  border-radius: 11px;
+  opacity: .93;
+  margin: auto;
+  margin-top: 22vh;
+  padding: 10px;
+}
+
+/*form add candidato*/
+
+.form-add-applicant {
+  text-align: center;
+  font-family: Poppin-Light;
+  color: var(--bg-arrow-icon);
+  font-size: 16px;
+  padding: 20px;
+}
+
+/*estilo de los inputs y select*/
+
+.form-add-applicant select, input {
+  border-radius: 20px;
+  border: 1px solid var(--borders);
+  padding: 5px 12px;
+  margin-bottom: 15px;
+  width: max( 86%, 50px);
+}
+
+/*Sección de busqueda del formulario agregar candidato*/
+
+.form-search {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-search>h4 {
+  color: var(--mustard);
+  margin-bottom: 30px;
+  font-family: Poppin-Medium;
+}
+
+.form-search input {
+  width: 70%;
+  text-align: center;
+}
+
+.form-search select {
+  max-width: 60%;
+  color: var(--muted);
+}
+
+/*Botones del formulario Agregar candidato*/
+
+.btn-form-applicant {
+  border-radius: 22px;
+  background-color: var(--mustard);
+  border: none;
+  color: #fff;
+  padding: 8px 20px;
+  width: 100px;
+  font-family: Poppin;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-form-applicant:hover {
+  background-color: var(--dark-mustard);
+  cursor: pointer;
+}
+
+/*Sección de agregado del formulario agregar candidato*/
+
+.form-add label {
+  font-family: Poppin-Medium;
+}
+
+.form-add-nombre {
+  text-align: start;
+}
+
+.form-add-info {
+  display: flex;
+  flex-direction: row;
+  text-align: start;
+}
+
+.form-add-info input {
+  width: 60px;
+  text-align: center;
+}
+
+.form-add-edad, .form-add-sexo, .form-add-diag {
+  width: 33.33%;
+}
