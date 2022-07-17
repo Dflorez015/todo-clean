@@ -161,7 +161,7 @@ align-self: center;
         border-radius: 15px;
         position: absolute;
         animation: ${wm} .1s linear;
-        background: var(--third) center/60% no-repeat url(/check.svg);
+        background: var(--third) center/60% no-repeat url(/todo-clean/check.svg);
         content: '';
         display: inline-block;
         visibility: visible;
