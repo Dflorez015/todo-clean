@@ -63,3 +63,11 @@ export const InputWrapper = styled.form`
     display: flex;
     align-items: center;    
 `
+
+export const HandleThemeWrapper = styled.div`
+    position: absolute;
+    top: 40px;
+    right: 2%;
+    background-color: transparent;
+    padding: .2rem;    
+`

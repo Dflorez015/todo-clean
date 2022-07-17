@@ -1,7 +1,7 @@
+import { ColorTheme } from "domain/entities/app";
 import { createGlobalStyle } from "styled-components";
-import { colorThemes } from "../ts/styled";
 
-export const GlobalStyle = createGlobalStyle<colorThemes>`
+export const GlobalStyle = createGlobalStyle<ColorTheme>`
 
 *{
     padding: 0px;

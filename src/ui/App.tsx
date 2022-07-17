@@ -1,14 +1,16 @@
-import { mainTheme } from "@constants/themes"
 import { HomePage } from "@pages/home"
+import { appStore } from "@store/app"
 import { GlobalStyle } from "@style/globalStyle"
 
 
 function App() {
 
+  const themeChoosen = appStore((state) => state.themeChoosen)
+
   return (
     <>
       <HomePage />
-      <GlobalStyle {...mainTheme} />
+      <GlobalStyle {...themeChoosen} />
     </>
   )
 }

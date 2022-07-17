@@ -1,4 +1,4 @@
-import { Task } from "-/entities/task"
+import { Task } from "domain/entities/task"
 import { HandleInput } from "./form-elements-type"
 
 export interface InputText {

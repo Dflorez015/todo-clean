@@ -1,4 +1,4 @@
-export interface colorThemes {
+export interface ColorTheme {
     main:               string;
     second:             string;
     third:              string;
