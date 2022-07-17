@@ -7,7 +7,7 @@ import { TaskProps } from "@ts/components-props"
 
 export function ListTask() {
 
-    const taskList = taskStore(state => state.taskList)
+    const taskList = taskStore(state => [...state.taskList, ...state.checkedTaskList])
 
     return (
         <TaskListWrapper>

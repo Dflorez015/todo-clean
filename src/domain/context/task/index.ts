@@ -4,6 +4,7 @@ import { addNewTask, editTaskOnList } from './useCase'
 
 export const taskStore = create<TaskRepository>((set) => ({
     taskList: [],
+    checkedTaskList: [],
     addTask: (title) => set((state) => ({ ...state, taskList: addNewTask(state, title) })),
-    editTask: (task) => set((state) => ({ ...state, taskList: editTaskOnList(state, task) }))
+    editTask: (task) => set((state) => (editTaskOnList(state, task)))
 }))

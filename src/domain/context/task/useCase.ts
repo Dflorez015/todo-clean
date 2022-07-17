@@ -1,4 +1,4 @@
-import { Task } from "~/domain/entities/task";
+import { Task } from "domain/entities/task";
 import { TaskRepository } from "./repository";
 
 export const addNewTask = (state: TaskRepository, title: string): Task[] => {
@@ -10,10 +10,15 @@ export const addNewTask = (state: TaskRepository, title: string): Task[] => {
     return [...taskList, { title: title, id: `${length + 1}`, checked: false }]
 }
 
-export const editTaskOnList = (state: TaskRepository, newTask: Task) => {
-    const { taskList } = state;
-    const indexTask = taskList.findIndex(task => task.id === newTask.id)
-    let newTaskList = [...taskList]
-    newTaskList[indexTask] = newTask
-    return [...newTaskList]
+export const editTaskOnList = (state: TaskRepository, newTask: Task): TaskRepository => {
+    const { taskList, checkedTaskList } = state;
+    if (newTask.checked) {
+        const editedTaskList = taskList.filter((task) => task.id !== newTask.id)
+        return { ...state, taskList: editedTaskList, checkedTaskList: [...checkedTaskList, newTask] }
+    }
+    else {
+        const editedCheckedTaskList = checkedTaskList.filter((task) => task.id !== newTask.id)
+        return { ...state, taskList: [...taskList, newTask], checkedTaskList: editedCheckedTaskList }
+    }
+
 }
